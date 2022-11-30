@@ -1,9 +1,9 @@
 import { default as Sidebar } from './Sidebar.vue';
 import { default as SidebarButton } from './SidebarButton.vue';
-import { default as SidebarHeader } from './SidebarHeader.vue';
+import { default as SidebarMenu } from './SidebarMenu.vue';
 
 export {
     Sidebar,
     SidebarButton,
-    SidebarHeader
+    SidebarMenu
 }

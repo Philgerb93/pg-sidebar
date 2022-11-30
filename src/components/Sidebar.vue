@@ -13,9 +13,14 @@
 </template>
   
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, computed } from "vue";
 
 export default defineComponent({
+  provide() {
+    return {
+      isExpanded: computed(() => this.isExpanded),
+    };
+  },
   data() {
     return {
       timer: 0,
@@ -59,7 +64,7 @@ $background-color: #1a2233;
 $divider-color: lighten($background-color, 10%);
 $accent-color: #3c9a7f;
 $icon-size: 24px;
-$sidebar-padding: 1.2rem;
+$sidebar-padding: 1.4rem;
 
 .sidebar {
   display: flex;
@@ -87,6 +92,7 @@ $sidebar-padding: 1.2rem;
     overflow-y: auto;
     overflow-x: hidden;
     flex: 1;
+    padding: 2rem 0;
   }
 
   .top {
@@ -97,84 +103,8 @@ $sidebar-padding: 1.2rem;
     border-top: 1px solid $divider-color;
   }
 
-  :slotted(.sidebar-header) {
-    opacity: 0;
-    transition: 0.3s ease-out;
-    user-select: none;
-    color: $header-color;
-    font-size: 0.875rem;
-    margin: 2rem $sidebar-padding 0.5rem $sidebar-padding;
-    text-transform: uppercase;
-
-    &:hover {
-      color: white;
-    }
-  }
-
-  :slotted(.sidebar-button) {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-
-    padding: 0.5rem $sidebar-padding;
-    transition: 0.2s ease-out;
-    cursor: pointer;
-
-    .router-link-exact-active {
-      border-right: 5px solid $accent-color;
-      background-color: lighten($color: $background-color, $amount: 5%);
-      cursor: default;
-      font-weight: bold;
-    }
-
-    .icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .icon * {
-      font-size: $icon-size;
-      height: $icon-size;
-      width: $icon-size;
-      color: white;
-    }
-
-    .text {
-      color: $text-color;
-      opacity: 0;
-      transition: 0.2s ease-out;
-      white-space: nowrap;
-      user-select: none;
-      line-height: 24px;
-    }
-
-    &:hover {
-      background-color: lighten($color: $background-color, $amount: 5%);
-      border-right: 5px solid $accent-color;
-
-      .icon *, .text {
-        color: $accent-color;
-      }
-    }
-  }
-
   &.expanded {
     width: $sidebar-width;
-
-    :slotted(.sidebar-header) {
-      opacity: 1;
-    }
-
-    :slotted(.sidebar-button) {
-      .icon * {
-        margin-right: 1rem;
-      }
-
-      .text {
-        opacity: 1;
-      }
-    }
   }
 }
 
