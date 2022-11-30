@@ -1,9 +1,9 @@
 <template>
-    <div class="sidebar-menu">
+    <div class="sidebar-menu" :class="{ collapsed: isMenuCollapsed }">
         <p v-if="title" class="sidebar-menu-header" :class="{ expanded: isExpanded, collapsable: collapsable }" @click="onClick">
             {{ title }} <i v-if="collapsable" class="arrow" :class="{ right: isMenuCollapsed, down: !isMenuCollapsed }"></i>
         </p>
-        <div class="sidebar-menu-content" :class="{ isCollapsed: isMenuCollapsed }">
+        <div ref="content" class="sidebar-menu-content">
             <slot></slot>
         </div>
     </div>
@@ -28,13 +28,23 @@ export default defineComponent({
         return {
             isExpanded: inject("isExpanded") as boolean,
             isMenuCollapsed: false,
+            collapsedHeight: 0,
+            expandedHeight: 0,
         }
+    },
+    mounted() {
+        this.expandedHeight = (this.$refs["content"] as any)?.offsetHeight;
+        let element = (this.$refs["content"] as any);
+        let height = (this.isMenuCollapsed ? this.collapsedHeight : this.expandedHeight) + "px";
+        element.style.height = height;
     },
     methods: {
         onClick() {
-            if (this.collapsable) {
-                this.isMenuCollapsed = !this.isMenuCollapsed;
-            }
+            if (!this.collapsable) return;
+            this.isMenuCollapsed = !this.isMenuCollapsed;
+            let element = (this.$refs["content"] as any);
+            let height = (this.isMenuCollapsed ? this.collapsedHeight : this.expandedHeight) + "px";
+            element.style.height = height;
         }
     },
 });
@@ -85,10 +95,8 @@ $sidebar-padding: 1.4rem;
     .sidebar-menu-content {
         display: flex;
         flex-direction: column;
-
-        &.isCollapsed {
-            display: none;
-        }
+        overflow: hidden;
+        transition: 0.2s ease-out;
     }
 }
 

@@ -61,12 +61,6 @@ $sidebar-padding: 1.4rem;
         align-items: center;
         transition: 0.2s ease-out;
 
-        // & > :slotted(img) {
-        //     width: 46px;
-        //     height: 46px;
-        //     border-radius: 8px;
-        // }
-
         & :slotted(*) {
             width: $icon-size;
             height: $icon-size;
