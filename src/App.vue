@@ -30,6 +30,51 @@
           <span class="material-icons">face</span>
         </SidebarButton>
       </SidebarMenu>
+
+      <SidebarMenu title="Reports">
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+      </SidebarMenu>
+
+      <SidebarMenu title="Reports">
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+      </SidebarMenu>
+
+      <SidebarMenu title="Reports">
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+        <SidebarButton label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarButton>
+      </SidebarMenu>
     </template>
     <template #bottom>
       <SidebarButton label="Settings" to="/settings">

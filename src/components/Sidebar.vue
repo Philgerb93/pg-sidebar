@@ -89,7 +89,7 @@ $sidebar-padding: 1.4rem;
   }
 
   .content {
-    overflow-y: auto;
+    overflow-y: hidden;
     overflow-x: hidden;
     flex: 1;
     padding: 2rem 0;
@@ -105,11 +105,15 @@ $sidebar-padding: 1.4rem;
 
   &.expanded {
     width: $sidebar-width;
+
+    .content {
+      overflow-y: auto;
+    }
   }
 }
 
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 3px;
 }
 
 /* Track */
