@@ -1,7 +1,7 @@
 <template>
     <router-link class="sidebar-button" :class="{ expanded: isExpanded }" :to="to">
-        <span class="icon"><slot></slot></span>
-        <span class="text">{{ label }}</span>
+        <span class="sidebar-button-icon"><slot></slot></span>
+        <span class="sidebar-button-text">{{ label }}</span>
     </router-link>
 </template>
 
@@ -53,13 +53,13 @@ $sidebar-padding: 1.4rem;
         font-weight: bold;
     }
 
-    .icon {
+    .sidebar-button-icon {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
-    .icon :slotted(*) {
+    .sidebar-button-icon :slotted(*) {
         font-size: $icon-size;
         height: $icon-size;
         width: $icon-size;
@@ -67,7 +67,7 @@ $sidebar-padding: 1.4rem;
         transition: 0.2s ease-out;
     }
 
-    .text {
+    .sidebar-button-text {
         color: $text-color;
         opacity: 0;
         transition: 0.2s ease-out;
@@ -80,18 +80,18 @@ $sidebar-padding: 1.4rem;
         background-color: lighten($color: $background-color, $amount: 5%);
         border-right: 5px solid $accent-color;
 
-        .icon :slotted(*),
-        .text {
+        .sidebar-button-icon :slotted(*),
+        .sidebar-button-text {
             color: $accent-color;
         }
     }
 
     &.expanded {
-        .icon :slotted(*) {
+        .sidebar-button-icon :slotted(*) {
             margin-right: 1rem;
         }
 
-        .text {
+        .sidebar-button-text {
             opacity: 1;
         }
     }

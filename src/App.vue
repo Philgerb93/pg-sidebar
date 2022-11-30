@@ -1,5 +1,11 @@
 <template>
-  <Sidebar>
+  <Sidebar :bottomPadding="false">
+    <template #top>
+      <SidebarCard title="PG Sidebar" subtitle="The Cleanest Sidebar" :border="false" >
+        <img src="https://media.istockphoto.com/id/1276731827/vector/leaf-vector-illustration-design-template-vector-eps-10.jpg?s=612x612&w=0&k=20&c=OGhPX91RW78rogpHfg9VzDBpMl3pPsML7fkLr0rA3rA="/>
+        <!-- <span class="material-icons">face</span> -->
+      </SidebarCard>
+    </template>
     <template #content>
       <SidebarMenu title="Dashboard" collapsable>
         <SidebarButton label="Home" to="/">

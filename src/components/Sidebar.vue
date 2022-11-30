@@ -1,12 +1,12 @@
 <template>
   <aside class="sidebar" :class="{ expanded: isExpanded }" @mouseover="expand" @mouseleave="collapse">
-    <div class="top" v-if="hasTopSlot">
+    <div class="top" v-if="hasTopSlot" :class="{ padding: topPadding }">
       <slot name="top"></slot>
     </div>
     <div class="content">
       <slot name="content"></slot>
     </div>
-    <div class="bottom" v-if="hasBottomSlot">
+    <div class="bottom" v-if="hasBottomSlot" :class="{ padding: bottomPadding }">
       <slot name="bottom"></slot>
     </div>
   </aside>
@@ -16,6 +16,18 @@
 import { defineComponent, computed } from "vue";
 
 export default defineComponent({
+  props: {
+    topPadding: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    bottomPadding: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+  },
   provide() {
     return {
       isExpanded: computed(() => this.isExpanded),
@@ -55,7 +67,6 @@ export default defineComponent({
 });
 </script>
   
-  
 <style lang="scss" scoped>
 $sidebar-width: 300px;
 $text-color: #bebfc0;
@@ -86,6 +97,15 @@ $sidebar-padding: 1.4rem;
   .content, .top, .bottom {
     display: flex;
     flex-direction: column;
+  }
+
+  .top,
+  .bottom {
+    padding: 0;
+
+    &.padding {
+      padding: 1rem 0;;
+    }
   }
 
   .content {
