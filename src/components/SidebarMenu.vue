@@ -22,6 +22,11 @@ export default defineComponent({
             type: Boolean,
             required: false,
             default: false
+        },
+        collapsed: {
+            type: Boolean,
+            required: false,
+            default: false
         }
     },
     data() {
@@ -34,14 +39,18 @@ export default defineComponent({
     },
     mounted() {
         this.expandedHeight = (this.$refs["content"] as any)?.offsetHeight;
-        let element = (this.$refs["content"] as any);
-        let height = (this.isMenuCollapsed ? this.collapsedHeight : this.expandedHeight) + "px";
-        element.style.height = height;
+        if (this.collapsable) {
+            this.isMenuCollapsed = this.collapsed;
+            this.setHeight();
+        }
     },
     methods: {
         onClick() {
             if (!this.collapsable) return;
             this.isMenuCollapsed = !this.isMenuCollapsed;
+            this.setHeight();
+        },
+        setHeight() {
             let element = (this.$refs["content"] as any);
             let height = (this.isMenuCollapsed ? this.collapsedHeight : this.expandedHeight) + "px";
             element.style.height = height;

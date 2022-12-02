@@ -22,7 +22,7 @@
         </SidebarButton>
       </SidebarMenu>
       
-      <SidebarMenu title="Reports">
+      <SidebarMenu title="Reports" collapsable collapsed>
         <SidebarButton label="Home" to="/">
           <span class="material-icons">face</span>
         </SidebarButton>
