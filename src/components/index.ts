@@ -1,11 +1,4 @@
-import { default as Sidebar } from './Sidebar.vue';
-import { default as SidebarButton } from './SidebarButton.vue';
-import { default as SidebarMenu } from './SidebarMenu.vue';
-import { default as SidebarCard } from './SidebarCard.vue';
-
-export {
-    Sidebar,
-    SidebarButton,
-    SidebarMenu,
-    SidebarCard
-}
+export { default as Sidebar } from './Sidebar.vue';
+export { default as SidebarButton } from './SidebarButton.vue';
+export { default as SidebarMenu } from './SidebarMenu.vue';
+export { default as SidebarCard } from './SidebarCard.vue';

@@ -26,9 +26,9 @@ export default defineConfig({
   build: {
     cssCodeSplit: false,
     lib: {
-      entry: "./src/SidebarPlugin.ts",
+      entry: "./src/components/index.ts",
       formats: ["es", "cjs"],
-      name: "SidebarPlugin",
+      name: "Sidebar",
       fileName: (format) => format === "es" ? "index.js" : "index.cjs",
     },
     rollupOptions: {
