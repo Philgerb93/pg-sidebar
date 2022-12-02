@@ -122,7 +122,6 @@ export default defineComponent({
   margin-top: 60px;
   box-sizing: border-box;
   border: 4px solid red;
-  height: 100vh;
   width: calc(100vw - 60px);
   height: calc(100vh - 60px);
 }
