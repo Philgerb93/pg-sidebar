@@ -1,5 +1,5 @@
 <template>
-  <aside class="sidebar" :style="{ width: currentWidth }" :class="{ expanded: isExpanded }" @mouseover="expand" @mouseleave="collapse">
+  <aside class="sidebar" :style="{ width: currentWidth, top: topOffset }" :class="{ expanded: isExpanded }" @mouseover="expand" @mouseleave="collapse">
     <div class="top" v-if="hasTopSlot" :style="{ height: topHeight }" :class="{ border: topSeparator === 'border', background: topSeparator === 'background' }">
       <slot :collapse="collapse" name="top"></slot>
     </div>
@@ -69,6 +69,11 @@ export default defineComponent({
       type: Boolean,
       required: false,
       default: false
+    },
+    topOffset: {
+      type: String,
+      required: false,
+      default: "0"
     }
   },
   provide() {
@@ -128,7 +133,6 @@ $accent-color: #3c9a7f;
 $expand-anim-speed: 0.2s;
 
 .sidebar {
-  top: 0;
   bottom: 0;
   left: 0;
   display: flex;
