@@ -1,9 +1,9 @@
 <template>
-    <div class="sidebar-menu" :class="{ collapsed: isMenuCollapsed }">
-        <p v-if="title" class="sidebar-menu-header" :class="{ expanded: isExpanded, collapsable: collapsable }" @click="onClick">
-            {{ title }} <i v-if="collapsable" class="arrow" :class="{ right: isMenuCollapsed, down: !isMenuCollapsed }"></i>
+    <div class="sidebar-section" :class="{ collapsed: isSectionCollapsed }">
+        <p v-if="title" class="sidebar-section-header" :class="{ expanded: isExpanded, collapsable: collapsable }" @click="onClick">
+            {{ title }} <i v-if="collapsable" class="arrow" :class="{ right: isSectionCollapsed, down: !isSectionCollapsed }"></i>
         </p>
-        <div ref="content" class="sidebar-menu-content">
+        <div ref="content" class="sidebar-section-content">
             <slot></slot>
         </div>
     </div>
@@ -32,7 +32,7 @@ export default defineComponent({
     data() {
         return {
             isExpanded: inject("isExpanded") as boolean,
-            isMenuCollapsed: false,
+            isSectionCollapsed: false,
             collapsedHeight: 0,
             expandedHeight: 0,
         }
@@ -40,19 +40,19 @@ export default defineComponent({
     mounted() {
         this.expandedHeight = (this.$refs["content"] as any)?.offsetHeight;
         if (this.collapsable) {
-            this.isMenuCollapsed = this.collapsed;
+            this.isSectionCollapsed = this.collapsed;
             this.setHeight();
         }
     },
     methods: {
         onClick() {
             if (!this.collapsable) return;
-            this.isMenuCollapsed = !this.isMenuCollapsed;
+            this.isSectionCollapsed = !this.isSectionCollapsed;
             this.setHeight();
         },
         setHeight() {
             let element = (this.$refs["content"] as any);
-            let height = (this.isMenuCollapsed ? this.collapsedHeight : this.expandedHeight) + "px";
+            let height = (this.isSectionCollapsed ? this.collapsedHeight : this.expandedHeight) + "px";
             element.style.height = height;
         }
     },
@@ -67,14 +67,14 @@ $background-color: #1a2233;
 $divider-color: lighten($background-color, 10%);
 $accent-color: #3c9a7f;
 $icon-size: 24px;
-$sidebar-padding: 1.4rem;
+$sidebar-padding: 18px;
 
-.sidebar-menu {
+.sidebar-section {
     &:not(:last-of-type) {
         margin-bottom: 1rem;
     }
 
-    .sidebar-menu-header {
+    .sidebar-section-header {
         opacity: 0;
         transition: 0.3s ease-out;
         user-select: none;
@@ -101,7 +101,7 @@ $sidebar-padding: 1.4rem;
         }
     }
 
-    .sidebar-menu-content {
+    .sidebar-section-content {
         display: flex;
         flex-direction: column;
         overflow: hidden;

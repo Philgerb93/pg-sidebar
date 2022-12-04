@@ -1,108 +1,129 @@
 <template>
-  <Sidebar :bottomPadding="false">
+  <Sidebar :bottomPadding="false" collapseOnLink>
     <template #top>
-      <SidebarCard title="PG Sidebar" subtitle="The Cleanest Sidebar" :border="false" >
+      <SidebarCard title="PG Sidebar" subtitle="The Cleanest Sidebar" :iconBorder="false" >
         <img src="https://media.istockphoto.com/id/1276731827/vector/leaf-vector-illustration-design-template-vector-eps-10.jpg?s=612x612&w=0&k=20&c=OGhPX91RW78rogpHfg9VzDBpMl3pPsML7fkLr0rA3rA="/>
-        <!-- <span class="material-icons">face</span> -->
       </SidebarCard>
     </template>
     <template #content>
-      <SidebarMenu title="Dashboard" collapsable>
-        <SidebarButton label="Home" to="/">
+      <SidebarSection>
+        <SidebarLink label="Home" to="/">
+          <span class="material-icons">face</span>
+        </SidebarLink>
+        <SidebarLink label="About" to="/about">
+          <span class="material-icons">face</span>
+        </SidebarLink>
+      </SidebarSection>
+      <SidebarSection title="Dashboard" collapsable>
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-      </SidebarMenu>
+      </SidebarSection>
       
-      <SidebarMenu title="Reports" collapsable collapsed>
-        <SidebarButton label="Home" to="/">
+      <SidebarSection title="Reports" collapsable collapsed>
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-      </SidebarMenu>
+      </SidebarSection>
 
-      <SidebarMenu title="Reports">
-        <SidebarButton label="Home" to="/">
+      <SidebarSection title="Reports">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-      </SidebarMenu>
+      </SidebarSection>
 
-      <SidebarMenu title="Reports">
-        <SidebarButton label="Home" to="/">
+      <SidebarSection title="Reports">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-      </SidebarMenu>
+      </SidebarSection>
 
-      <SidebarMenu title="Reports">
-        <SidebarButton label="Home" to="/">
+      <SidebarSection title="Reports">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-        <SidebarButton label="Home" to="/">
+        <SidebarButton label="Button" @click="onClick">
           <span class="material-icons">face</span>
         </SidebarButton>
-      </SidebarMenu>
+      </SidebarSection>
     </template>
     <template #bottom>
-      <SidebarButton label="Settings" to="/settings">
+      <SidebarButton label="Settings" @click="onClick">
         <span class="material-icons">face</span>
       </SidebarButton>
     </template>
   </Sidebar>
+  <router-view class="main"></router-view>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { SidebarSection } from "./components";
 
 export default defineComponent({
-  data() {
-    return {
-    };
-  },
+    data() {
+        return {};
+    },
+    components: { SidebarSection },
+    methods: {
+        onClick() {
+            console.log("clicked");
+        },
+    },
 });
 </script>
 
 
 <style lang="scss">
+.main {
+  margin-left: 60px;
+  box-sizing: border-box;
+  border: 4px solid red;
+  height: 100vh;
+  width: calc(100vw - 60px);
+}
 body {
   margin: 0;
 }

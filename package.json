@@ -23,7 +23,8 @@
   },
   "dependencies": {
     "vite-plugin-dts": "^1.7.1",
-    "vue": "^3.2.41"
+    "vue": "^3.2.41",
+    "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.4",

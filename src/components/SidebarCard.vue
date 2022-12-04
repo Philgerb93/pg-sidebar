@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar-card" :class="{ expanded: isExpanded }">
-        <div class="sidebar-card-icon" :class="{ border: border }">
+        <div class="sidebar-card-icon" :class="{ border: iconBorder }">
             <slot></slot>
         </div>
         <div class="sidebar-card-info">
@@ -23,7 +23,7 @@ export default defineComponent({
             type: String,
             required: false
         },
-        border: {
+        iconBorder: {
             type: Boolean,
             required: false,
             default: false
@@ -38,23 +38,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-$sidebar-width: 300px;
 $text-color: #bebfc0;
-$header-color: darken(#bebfc0, 20%);
-$background-color: #1a2233;
-$divider-color: lighten($background-color, 10%);
 $accent-color: #3c9a7f;
-$icon-size: 24px;
-$sidebar-padding: 1.4rem;
+$icon-size: 44px;
+$sidebar-padding: calc((60px - $icon-size) / 2);
 
 .sidebar-card {
     display: flex;
-    padding: 0 calc($sidebar-padding / 2);
+    padding: 0 $sidebar-padding;
 
     .sidebar-card-icon {
-        width: 46px;
-        min-width: 46px;
-        height: 46px;
+        width: 44px;
+        min-width: 44px;
+        height: 44px;
         border-radius: 8px;
         display: flex;
         justify-content: center;
@@ -67,8 +63,8 @@ $sidebar-padding: 1.4rem;
         }
 
         & :slotted(img) {
-            width: 46px;
-            height: 46px;
+            width: 44px;
+            height: 44px;
             border-radius: 8px;
         }
 

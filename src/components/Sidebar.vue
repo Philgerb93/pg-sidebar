@@ -1,13 +1,13 @@
 <template>
-  <aside class="sidebar" :class="{ expanded: isExpanded }" @mouseover="expand" @mouseleave="collapse">
-    <div class="top" v-if="hasTopSlot" :class="{ padding: topPadding }">
-      <slot name="top"></slot>
+  <aside class="sidebar" :style="{ width: currentWidth }" :class="{ expanded: isExpanded }" @mouseover="expand" @mouseleave="collapse">
+    <div class="top" v-if="hasTopSlot" :class="{ padding: topPadding, border: topBorder }">
+      <slot :collapse="collapse" name="top"></slot>
     </div>
     <div class="content">
-      <slot name="content"></slot>
+      <slot :collapse="collapse" name="content"></slot>
     </div>
-    <div class="bottom" v-if="hasBottomSlot" :class="{ padding: bottomPadding }">
-      <slot name="bottom"></slot>
+    <div class="bottom" v-if="hasBottomSlot" :class="{ padding: bottomPadding, border: bottomBorder }">
+      <slot :collapse="collapse" name="bottom"></slot>
     </div>
   </aside>
 </template>
@@ -27,61 +27,91 @@ export default defineComponent({
       required: false,
       default: true
     },
+    topBorder: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    bottomBorder: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    expandedWidth: {
+      type: String,
+      required: false,
+      default: "240px"
+    },
+    collapseOnButton: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    collapseOnLink: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
   },
   provide() {
     return {
       isExpanded: computed(() => this.isExpanded),
+      collapseFromChild: (source: string) => this.collapseFromChild(source)
     };
   },
   data() {
     return {
       timer: 0,
       isExpanded: false,
-      delayInMilliseconds: 50
+      delayInMilliseconds: 200,
+      disabledExpand: false,
     };
   },
   computed: {
-    hasTopSlot() {
+    hasTopSlot(): boolean {
       return this.$slots.top != undefined;
     },
-    hasBottomSlot() {
+    hasBottomSlot(): boolean {
       return this.$slots.bottom != undefined;
+    },
+    currentWidth(): string {
+      return this.isExpanded ? this.expandedWidth : "60px";
     }
   },
   methods: {
     expand() {
-      if (this.timer == 0) {
-        this.timer = setTimeout(() => {
-          this.isExpanded = true;
-        }, this.delayInMilliseconds);
-      }
+      if (this.disabledExpand) return;
+      this.isExpanded = true;
     },
     collapse() {
-      if (this.timer) {
-        clearTimeout(this.timer);
-        this.timer = 0;
-      }
       this.isExpanded = false;
+
+      this.disabledExpand = true;
+      this.timer = setTimeout(() => {
+        this.disabledExpand = false;
+        }, this.delayInMilliseconds);
+    },
+    collapseFromChild(source: string) {
+      if (source === "button" && this.collapseOnButton || source === "link" && this.collapseOnLink) {
+        this.collapse();
+      }
     }
   },
 });
 </script>
   
 <style lang="scss" scoped>
-$sidebar-width: 300px;
-$text-color: #bebfc0;
-$header-color: darken(#bebfc0, 20%);
+$collapsed-width: 60px;
 $background-color: #1a2233;
 $divider-color: lighten($background-color, 10%);
 $accent-color: #3c9a7f;
-$icon-size: 24px;
-$sidebar-padding: 1.4rem;
+$expand-anim-speed: 0.2s;
 
 .sidebar {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: calc($sidebar-padding * 2 + $icon-size); // Padding + icon width
+  width: $collapsed-width;
   min-height: 100vh;
   height: 100vh;
   max-height: 100vh;
@@ -92,7 +122,7 @@ $sidebar-padding: 1.4rem;
   background-color: $background-color;
   color: white;
 
-  transition: 0.2s ease-out;
+  transition: width $expand-anim-speed ease-out;
 
   .content, .top, .bottom {
     display: flex;
@@ -104,7 +134,7 @@ $sidebar-padding: 1.4rem;
     padding: 0;
 
     &.padding {
-      padding: 1rem 0;;
+      padding: 16px 0;
     }
   }
 
@@ -112,19 +142,19 @@ $sidebar-padding: 1.4rem;
     overflow-y: hidden;
     overflow-x: hidden;
     flex: 1;
-    padding: 2rem 0;
+    padding: 24px 0;
   }
 
-  .top {
+  .top.border {
     border-bottom: 1px solid $divider-color;
   }
 
-  .bottom {
+  .bottom.border {
     border-top: 1px solid $divider-color;
   }
 
   &.expanded {
-    width: $sidebar-width;
+    // width: $sidebar-width;
 
     .content {
       overflow-y: auto;
@@ -133,7 +163,7 @@ $sidebar-padding: 1.4rem;
 }
 
 ::-webkit-scrollbar {
-  width: 3px;
+  width: 4px;
 }
 
 /* Track */
