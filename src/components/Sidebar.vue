@@ -118,10 +118,10 @@ $expand-anim-speed: 0.2s;
   overflow: hidden;
   position: fixed;
   z-index: 99;
-
+  text-align: start;
+  font-family: 'Source Sans Pro', sans-serif;
   background-color: $background-color;
   color: white;
-
   transition: width $expand-anim-speed ease-out;
 
   .content, .top, .bottom {
