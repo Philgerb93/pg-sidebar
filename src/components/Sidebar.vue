@@ -1,12 +1,12 @@
 <template>
   <aside class="sidebar" :style="{ width: currentWidth }" :class="{ expanded: isExpanded }" @mouseover="expand" @mouseleave="collapse">
-    <div class="top" v-if="hasTopSlot" :class="{ padding: topPadding, border: topBorder }">
+    <div class="top" v-if="hasTopSlot" :style="{ height: topHeight }" :class="{ border: topSeparator === 'border', background: topSeparator === 'background' }">
       <slot :collapse="collapse" name="top"></slot>
     </div>
     <div class="content">
       <slot :collapse="collapse" name="content"></slot>
     </div>
-    <div class="bottom" v-if="hasBottomSlot" :class="{ padding: bottomPadding, border: bottomBorder }">
+    <div class="bottom" v-if="hasBottomSlot" :style="{ height: bottomHeight }" :class="{ border: bottomSeparator === 'border', background: bottomSeparator === 'background' }">
       <slot :collapse="collapse" name="bottom"></slot>
     </div>
   </aside>
@@ -17,25 +17,30 @@ import { defineComponent, computed } from "vue";
 
 export default defineComponent({
   props: {
-    topPadding: {
-      type: Boolean,
+    topHeight: {
+      type: String,
       required: false,
-      default: true
+      default: "unset"
+    },
+    bottomHeight: {
+      type: String,
+      required: false,
+      default: "unset"
     },
     bottomPadding: {
       type: Boolean,
       required: false,
       default: true
     },
-    topBorder: {
-      type: Boolean,
+    topSeparator: {
+      type: String,
       required: false,
-      default: true
+      default: "none"
     },
-    bottomBorder: {
-      type: Boolean,
+    bottomSeparator: {
+      type: String,
       required: false,
-      default: true
+      default: "none"
     },
     expandedWidth: {
       type: String,
@@ -101,6 +106,7 @@ export default defineComponent({
 </script>
   
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 $collapsed-width: 60px;
 $background-color: #1a2233;
 $divider-color: lighten($background-color, 10%);
@@ -132,10 +138,9 @@ $expand-anim-speed: 0.2s;
   .top,
   .bottom {
     padding: 0;
-
-    &.padding {
-      padding: 16px 0;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .content {
@@ -153,9 +158,12 @@ $expand-anim-speed: 0.2s;
     border-top: 1px solid $divider-color;
   }
 
-  &.expanded {
-    // width: $sidebar-width;
+  .top.background,
+  .bottom.background {
+    background-color: $divider-color;
+  }
 
+  &.expanded {
     .content {
       overflow-y: auto;
     }
