@@ -128,6 +128,9 @@ $accent-color: #3c9a7f;
 $expand-anim-speed: 0.2s;
 
 .sidebar {
+  top: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
