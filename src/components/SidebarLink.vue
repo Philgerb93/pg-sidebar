@@ -1,7 +1,9 @@
 <template>
     <router-link @click="onClick" v-ripple class="sidebar-link" :class="{ expanded: isExpanded }" :to="to">
         <div class="wrapper">
-            <span class="sidebar-link-icon"><slot></slot></span>
+            <span class="sidebar-link-icon" :class="{ S: iconSize === 'S', L: iconSize === 'L' }">
+                <slot></slot>
+            </span>
             <span class="sidebar-link-text">{{ label }}</span>
         </div>
     </router-link>
@@ -25,6 +27,7 @@ export default defineComponent({
         return {
             isExpanded: inject("isExpanded") as boolean,
             collapseFromChild: inject("collapseFromChild") as (source: string) => void,
+            iconSize: inject("iconSize") as string,
         }
     },
     methods: {
@@ -40,6 +43,7 @@ $text-color: #bebfc0;
 $background-color: #1a2233;
 $accent-color: #3c9a7f;
 $icon-size: 24px;
+$icon-size-small: 16px;
 $sidebar-padding: calc((60px - $icon-size) / 2);
 $hover-anim-speed: 0.2s;
 $expand-anim-speed: 0.2s;
@@ -57,10 +61,10 @@ $active-border-width: 6px;
         cursor: default;
         padding-left: calc($sidebar-padding - $active-border-width);
 
-        .sidebar-button-icon :slotted(*),
-        .sidebar-button-text {
-            color: $accent-color;
-        }
+        // .sidebar-link-icon :slotted(*),
+        // .sidebar-link-text {
+        //     color: $accent-color;
+        // }
     }
 
     .wrapper {
@@ -78,14 +82,26 @@ $active-border-width: 6px;
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .sidebar-link-icon :slotted(*) {
-        font-size: $icon-size;
         height: $icon-size;
         width: $icon-size;
-        color: white;
+        min-width: $icon-size;
         transition: margin $expand-anim-speed ease-out;
+
+        & :slotted(*) {
+            color: white;
+        }
+
+        &.L :slotted(*) {
+            font-size: $icon-size;
+            height: $icon-size;
+            width: $icon-size;
+        }
+    
+        &.S :slotted(*) {
+            font-size: $icon-size-small;
+            height: $icon-size-small;
+            width: $icon-size-small;
+        }
     }
 
     .sidebar-link-text {
@@ -98,7 +114,7 @@ $active-border-width: 6px;
     }
 
     &.expanded {
-        .sidebar-link-icon :slotted(*) {
+        .sidebar-link-icon {
             margin-right: 1rem;
         }
 

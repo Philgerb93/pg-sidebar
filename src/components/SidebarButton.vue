@@ -1,7 +1,9 @@
 <template>
     <button @click="onClick" v-ripple class="sidebar-button" :class="{ expanded: isExpanded }">
         <div class="wrapper">
-            <span class="sidebar-button-icon"><slot></slot></span>
+            <span class="sidebar-button-icon" :class="{ S: iconSize === 'S', L: iconSize === 'L' }">
+                <slot></slot>
+            </span>
             <span class="sidebar-button-text">{{ label }}</span>
         </div>
     </button>
@@ -21,6 +23,7 @@ export default defineComponent({
         return {
             isExpanded: inject("isExpanded") as boolean,
             collapseFromChild: inject("collapseFromChild") as (source: string) => void,
+            iconSize: inject("iconSize") as string,
         }
     },
     methods: {
@@ -34,6 +37,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 $text-color: #bebfc0;
 $icon-size: 24px;
+$icon-size-small: 16px;
 $sidebar-padding: calc((60px - $icon-size) / 2);
 $accent-color: #3c9a7f;
 $hover-anim-speed: 0.2s;
@@ -61,14 +65,26 @@ $expand-anim-speed: 0.2s;
         display: flex;
         justify-content: center;
         align-items: center;
-    }
-
-    .sidebar-button-icon :slotted(*) {
-        font-size: $icon-size;
         height: $icon-size;
         width: $icon-size;
-        color: white;
+        min-width: $icon-size;
         transition: margin $expand-anim-speed ease-out;
+
+        & :slotted(*) {
+            color: white;
+        }
+
+        &.L :slotted(*) {
+            font-size: $icon-size;
+            height: $icon-size;
+            width: $icon-size;
+        }
+
+        &.S :slotted(*) {
+            font-size: $icon-size-small;
+            height: $icon-size-small;
+            width: $icon-size-small;
+        }
     }
 
     .sidebar-button-text {
@@ -81,7 +97,7 @@ $expand-anim-speed: 0.2s;
     }
 
     &.expanded {
-        .sidebar-button-icon :slotted(*) {
+        .sidebar-button-icon {
             margin-right: 1rem;
         }
 

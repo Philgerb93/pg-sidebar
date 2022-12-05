@@ -57,10 +57,16 @@ export default defineComponent({
       required: false,
       default: false
     },
+    iconSize: {
+      type: String,
+      required: false,
+      default: "L"
+    }
   },
   provide() {
     return {
       isExpanded: computed(() => this.isExpanded),
+      iconSize: computed(() => this.iconSize),
       collapseFromChild: (source: string) => this.collapseFromChild(source)
     };
   },
