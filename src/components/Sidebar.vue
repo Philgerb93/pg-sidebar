@@ -1,13 +1,13 @@
 <template>
   <aside class="sidebar" :style="{ width: currentWidth, top: topOffset, height: currentHeight, minHeight: currentHeight, maxHeight: currentHeight }" :class="{ expanded: isExpanded }" @mouseover="expand" @mouseleave="collapse">
     <div class="top" v-if="hasTopSlot" :style="{ height: topHeight }" :class="{ border: topSeparator === 'border', background: topSeparator === 'background' }">
-      <slot :collapse="collapse" name="top"></slot>
+      <slot name="top"></slot>
     </div>
     <div class="content">
-      <slot :collapse="collapse" name="content"></slot>
+      <slot name="content"></slot>
     </div>
     <div class="bottom" v-if="hasBottomSlot" :style="{ height: bottomHeight }" :class="{ border: bottomSeparator === 'border', background: bottomSeparator === 'background' }">
-      <slot :collapse="collapse" name="bottom"></slot>
+      <slot name="bottom"></slot>
     </div>
   </aside>
   <transition v-if="background" name="fade-bg">
