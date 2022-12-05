@@ -10,6 +10,9 @@
       <slot :collapse="collapse" name="bottom"></slot>
     </div>
   </aside>
+  <transition v-if="background" name="fade-bg">
+    <div v-if="isExpanded" class="expanded-background"></div>
+  </transition>
 </template>
   
 <script lang="ts">
@@ -61,6 +64,11 @@ export default defineComponent({
       type: String,
       required: false,
       default: "L"
+    },
+    background: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   provide() {
@@ -193,5 +201,36 @@ $expand-anim-speed: 0.2s;
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: $accent-color;
+}
+
+.expanded-background {
+  background-color: rgba(black, 0.4);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: z(popup-bg);
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all calc($expand-anim-speed / 4) ease;
+}
+
+.fade-enter-active {
+  transition-delay: calc($expand-anim-speed / 4);
+}
+
+.fade-enter-from,
+.fade-leave-to,
+.fade-bg-enter-from,
+.fade-bg-leave-to {
+  opacity: 0;
+}
+
+.fade-bg-enter-active,
+.fade-bg-leave-active {
+  transition: all $expand-anim-speed ease-out;
 }
 </style>
