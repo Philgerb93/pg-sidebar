@@ -29,11 +29,6 @@ export default defineComponent({
             required: false,
             default: false
         },
-        iconPadding: {
-            type: String,
-            required: false,
-            default: "0"
-        },
         separator: {
             type: Boolean,
             required: false,
