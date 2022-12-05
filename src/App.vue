@@ -1,9 +1,9 @@
 <template>
   <Sidebar topOffset="60px" topHeight="60px" topSeparator="background" bottomSeparator="border" collapseOnLink background>
     <template #top>
-      <SidebarCard title="PG Sidebar" subtitle="The Cleanest Sidebar" :iconBorder="false" >
+      <SidebarLogo title="PG Sidebar" subtitle="The Cleanest Sidebar" >
         <img src="https://media.istockphoto.com/id/1276731827/vector/leaf-vector-illustration-design-template-vector-eps-10.jpg?s=612x612&w=0&k=20&c=OGhPX91RW78rogpHfg9VzDBpMl3pPsML7fkLr0rA3rA="/>
-      </SidebarCard>
+      </SidebarLogo>
     </template>
     <template #content>
       <SidebarSection>

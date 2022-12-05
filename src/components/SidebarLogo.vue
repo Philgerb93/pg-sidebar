@@ -1,9 +1,9 @@
 <template>
-    <div class="sidebar-card" :class="{ expanded: isExpanded }">
-        <div class="sidebar-card-icon" :class="{ border: iconBorder }">
+    <div class="sidebar-logo" :class="{ expanded: isExpanded }">
+        <div class="sidebar-logo-icon" :class="{ border: iconBorder }">
             <slot></slot>
         </div>
-        <div class="sidebar-card-info">
+        <div class="sidebar-logo-info">
             <p class="title">{{ title }}</p>
             <p class="subtitle">{{ subtitle }}</p>
         </div>
@@ -41,13 +41,14 @@ export default defineComponent({
 $text-color: #bebfc0;
 $accent-color: #3c9a7f;
 $icon-size: 44px;
+$inner-icon-size: 24px;
 $sidebar-padding: calc((60px - $icon-size) / 2);
 
-.sidebar-card {
+.sidebar-logo {
     display: flex;
     padding: 0 $sidebar-padding;
 
-    .sidebar-card-icon {
+    .sidebar-logo-icon {
         width: 44px;
         min-width: 44px;
         height: 44px;
@@ -60,11 +61,10 @@ $sidebar-padding: calc((60px - $icon-size) / 2);
         & :slotted(*) {
             width: $icon-size;
             height: $icon-size;
+            font-size: $icon-size;
         }
 
         & :slotted(img) {
-            width: 44px;
-            height: 44px;
             border-radius: 8px;
         }
 
@@ -72,13 +72,14 @@ $sidebar-padding: calc((60px - $icon-size) / 2);
             background-color: $accent-color;
 
             & :slotted(*) {
-                width: $icon-size;
-                height: $icon-size;
+                width: $inner-icon-size;
+                height: $inner-icon-size;
+                font-size: $inner-icon-size;
             }
         }
     }
 
-    .sidebar-card-info {
+    .sidebar-logo-info {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -104,11 +105,11 @@ $sidebar-padding: calc((60px - $icon-size) / 2);
     }
 
     &.expanded {
-        .sidebar-card-icon {
+        .sidebar-logo-icon {
             margin-right: 1rem;
         }
 
-        .sidebar-card-info {
+        .sidebar-logo-info {
             opacity: 1;
         }
     }
