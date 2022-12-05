@@ -221,7 +221,7 @@ $expand-anim-speed: 0.2s;
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: z(popup-bg);
+  z-index: 98;
 }
 
 .fade-enter-active,
