@@ -1,7 +1,7 @@
 <template>
     <button @click="onClick" v-ripple class="sidebar-button" :class="{ expanded: isExpanded }">
         <div class="wrapper">
-            <span class="sidebar-button-icon" :class="{ S: iconSize === 'S', L: iconSize === 'L' }">
+            <span class="sidebar-button-icon" :class="iconSize">
                 <slot></slot>
             </span>
             <span class="sidebar-button-text">{{ label }}</span>
@@ -38,6 +38,7 @@ export default defineComponent({
 $text-color: #bebfc0;
 $icon-size: 24px;
 $icon-size-small: 16px;
+$icon-size-medium: 20px;
 $sidebar-padding: calc((60px - $icon-size) / 2);
 $accent-color: #3c9a7f;
 $hover-anim-speed: 0.2s;
@@ -74,16 +75,22 @@ $expand-anim-speed: 0.2s;
             color: white;
         }
 
-        &.L :slotted(*) {
-            font-size: $icon-size;
-            height: $icon-size;
-            width: $icon-size;
-        }
-
         &.S :slotted(*) {
             font-size: $icon-size-small;
             height: $icon-size-small;
             width: $icon-size-small;
+        }
+
+        &.M :slotted(*) {
+            font-size: $icon-size-medium;
+            height: $icon-size-medium;
+            width: $icon-size-medium;
+        }
+
+        &.L :slotted(*) {
+            font-size: $icon-size;
+            height: $icon-size;
+            width: $icon-size;
         }
     }
 
