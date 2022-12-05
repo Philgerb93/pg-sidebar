@@ -4,7 +4,7 @@ import router from './router/index'
 import { Sidebar, SidebarLink, SidebarButton, SidebarCard, SidebarSection } from './components'
 
 import './assets/main.css'
-import './assets/reset.css'
+// import './assets/reset.css'
 
 const app = createApp(App);
 app.component("Sidebar", Sidebar);

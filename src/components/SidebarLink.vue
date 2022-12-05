@@ -88,10 +88,12 @@ $expand-anim-speed: 0.2s;
 $active-border-width: 6px;
 
 .sidebar-link {
+    font-family: 'Source Sans Pro', sans-serif;
     height: 48px;
     text-decoration: none;
     padding: 0 $sidebar-padding;
     cursor: pointer;
+    font-size: 1rem;
     overflow: hidden; // For the ripple animation
     position: relative; // For the ripple animation
 
@@ -100,11 +102,6 @@ $active-border-width: 6px;
         background-color: lighten($color: $background-color, $amount: 5%);
         cursor: default;
         padding-left: calc($sidebar-padding - $active-border-width);
-
-        // .sidebar-link-icon :slotted(*),
-        // .sidebar-link-text {
-        //     color: $accent-color;
-        // }
     }
 
     .wrapper {

@@ -82,6 +82,7 @@ $hover-anim-speed: 0.2s;
 $expand-anim-speed: 0.2s;
 
 .sidebar-button {
+    font-family: 'Source Sans Pro', sans-serif;
     height: 48px;
     padding: 0 $sidebar-padding;
     cursor: pointer;
@@ -89,6 +90,7 @@ $expand-anim-speed: 0.2s;
     border: none;
     overflow: hidden; // For the ripple animation
     position: relative; // For the ripple animation
+    font-size: 1rem;
 
     .wrapper {
         display: flex;
