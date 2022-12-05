@@ -1,6 +1,6 @@
 {
   "name": "pg-sidebar",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "type": "module",
   "exports": {
     ".": "./dist/index.js",
