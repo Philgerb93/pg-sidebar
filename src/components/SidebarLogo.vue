@@ -1,8 +1,9 @@
 <template>
     <div class="sidebar-logo" :class="{ expanded: isExpanded }">
-        <div class="sidebar-logo-icon" :class="{ border: iconBorder }">
-            <slot></slot>
+        <div class="sidebar-logo-icon" :class="{ background: iconBackground }">
+            <slot style="background-color: red;"></slot>
         </div>
+        <div v-if="separator" class="sidebar-logo-separator"></div>
         <div class="sidebar-logo-info">
             <p class="title">{{ title }}</p>
             <p class="subtitle">{{ subtitle }}</p>
@@ -23,7 +24,17 @@ export default defineComponent({
             type: String,
             required: false
         },
-        iconBorder: {
+        iconBackground: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
+        iconPadding: {
+            type: String,
+            required: false,
+            default: "0"
+        },
+        separator: {
             type: Boolean,
             required: false,
             default: false
@@ -41,22 +52,23 @@ export default defineComponent({
 $text-color: #bebfc0;
 $accent-color: #3c9a7f;
 $icon-size: 44px;
-$inner-icon-size: 24px;
+$inner-icon-size: 40px;
 $sidebar-padding: calc((60px - $icon-size) / 2);
+$expand-anim-speed: 0.2s;
 
 .sidebar-logo {
     display: flex;
     padding: 0 $sidebar-padding;
 
     .sidebar-logo-icon {
-        width: 44px;
-        min-width: 44px;
-        height: 44px;
+        width: $icon-size;
+        min-width: $icon-size;
+        height: $icon-size;
         border-radius: 8px;
         display: flex;
         justify-content: center;
         align-items: center;
-        transition: 0.2s ease-out;
+        transition: $expand-anim-speed ease-out;
 
         & :slotted(*) {
             width: $icon-size;
@@ -68,7 +80,7 @@ $sidebar-padding: calc((60px - $icon-size) / 2);
             border-radius: 8px;
         }
 
-        &.border {
+        &.background {
             background-color: $accent-color;
 
             & :slotted(*) {
@@ -79,12 +91,21 @@ $sidebar-padding: calc((60px - $icon-size) / 2);
         }
     }
 
+    .sidebar-logo-separator {
+        height: 100%;
+        width: 1px;
+        background-color: white;
+        margin-right: 1rem;
+        opacity: 0;
+        transition: $expand-anim-speed ease-out;
+    }
+
     .sidebar-logo-info {
         display: flex;
         flex-direction: column;
         justify-content: center;
         opacity: 0;
-        transition: 0.2s ease-out;
+        transition: $expand-anim-speed ease-out;
 
         .title,
         .subtitle {
@@ -107,6 +128,10 @@ $sidebar-padding: calc((60px - $icon-size) / 2);
     &.expanded {
         .sidebar-logo-icon {
             margin-right: 1rem;
+        }
+
+        .sidebar-logo-separator {
+            opacity: 0.2;
         }
 
         .sidebar-logo-info {

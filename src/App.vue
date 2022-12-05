@@ -1,8 +1,10 @@
 <template>
   <Sidebar topOffset="60px" topHeight="60px" topSeparator="background" bottomSeparator="border" collapseOnLink background>
     <template #top>
-      <SidebarLogo title="PG Sidebar" subtitle="The Cleanest Sidebar" >
+      <SidebarLogo title="PG Sidebar" subtitle="The Cleanest Sidebar">
         <img src="https://media.istockphoto.com/id/1276731827/vector/leaf-vector-illustration-design-template-vector-eps-10.jpg?s=612x612&w=0&k=20&c=OGhPX91RW78rogpHfg9VzDBpMl3pPsML7fkLr0rA3rA="/>
+        <!-- <img src="./assets/logo_crha.png" /> -->
+        <!-- <span class="material-icons">face</span> -->
       </SidebarLogo>
     </template>
     <template #content>
