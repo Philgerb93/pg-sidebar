@@ -1,7 +1,7 @@
 <template>
     <div class="sidebar-logo" :class="{ expanded: isExpanded }">
         <div class="sidebar-logo-icon" :class="{ background: iconBackground }">
-            <slot style="background-color: red;"></slot>
+            <slot></slot>
         </div>
         <div v-if="separator" class="sidebar-logo-separator"></div>
         <div class="sidebar-logo-info">
