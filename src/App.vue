@@ -98,24 +98,6 @@
   <router-view class="main"></router-view>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import { SidebarSection } from "./components";
-
-export default defineComponent({
-    data() {
-        return {};
-    },
-    components: { SidebarSection },
-    methods: {
-        onClick() {
-            console.log("clicked");
-        },
-    },
-});
-</script>
-
-
 <style lang="scss">
 .main {
   margin-left: 60px;
