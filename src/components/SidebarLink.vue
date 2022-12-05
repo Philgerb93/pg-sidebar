@@ -1,5 +1,5 @@
 <template>
-    <router-link @click="onClick" v-ripple class="sidebar-link" :class="{ expanded: isExpanded }" :to="to">
+    <router-link @click="onClick" class="sidebar-link" :class="{ expanded: isExpanded }" :to="to">
         <div class="wrapper">
             <span class="sidebar-link-icon" :class="iconSize">
                 <slot></slot>
@@ -31,8 +31,45 @@ export default defineComponent({
         }
     },
     methods: {
-        onClick() {
+        onClick(event: MouseEvent) {
+            this.handleRipple(this.$el, event);
             this.collapseFromChild("link");
+        },
+        handleRipple(element: any, ev: any) {
+            const rippleElement = document.createElement("span");
+            let currentDiameter = 1;
+            let currentOpacity = 0.65;
+            let animSpeed = 5;
+            let animationHandler = setInterval(animateRippleSpread, animSpeed);
+            applyRippleStyle();
+
+            function applyRippleStyle() {
+                const elementCoordinates = element.getBoundingClientRect();
+                const offsetY = ev.clientY - elementCoordinates.y;
+                const offsetX = ev.clientX - elementCoordinates.x;
+
+                rippleElement.style.position = "absolute";
+                rippleElement.style.height = "5px";
+                rippleElement.style.width = "5px";
+                rippleElement.style.borderRadius = "100%";
+                rippleElement.style.backgroundColor = "#FFFFFF33";
+                rippleElement.style.left = `${offsetX}px`;
+                rippleElement.style.top = `${offsetY}px`;
+                ev.target.appendChild(rippleElement);
+            }
+
+            function animateRippleSpread() {
+                const maximalDiameter = 50;
+                if (currentDiameter <= maximalDiameter) {
+                    currentDiameter++;
+                    currentOpacity -= 0.65 / maximalDiameter;
+                    rippleElement.style.transform = `scale(${currentDiameter})`;
+                    rippleElement.style.opacity = `${currentOpacity}`;
+                } else {
+                    rippleElement.remove();
+                    clearInterval(animationHandler);
+                }
+            }
         }
     }
 });
@@ -55,6 +92,8 @@ $active-border-width: 6px;
     text-decoration: none;
     padding: 0 $sidebar-padding;
     cursor: pointer;
+    overflow: hidden; // For the ripple animation
+    position: relative; // For the ripple animation
 
     &.router-link-exact-active {
         border-left: $active-border-width solid $accent-color;

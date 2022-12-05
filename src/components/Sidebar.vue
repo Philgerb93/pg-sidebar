@@ -102,7 +102,6 @@ export default defineComponent({
       return this.isExpanded ? this.expandedWidth : "60px";
     },
     currentHeight(): string {
-      console.log(window.innerHeight / 100);
       return (window.innerHeight - parseInt(this.topOffset, 10)) + 'px';
     }
   },
