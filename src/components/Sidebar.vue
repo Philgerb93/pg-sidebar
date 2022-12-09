@@ -1,5 +1,5 @@
 <template>
-  <aside class="sidebar" :style="{ width: currentWidth, top: topOffset, height: currentHeight, minHeight: currentHeight, maxHeight: currentHeight }" :class="{ expanded: isExpanded }" @mouseover="expand" @mouseleave="collapse">
+  <aside class="sidebar" :style="{ width: currentWidth, top: topOffset }" :class="{ expanded: isExpanded }" @mouseover="expand" @mouseleave="collapse">
     <div class="top" v-if="hasTopSlot" :style="{ height: topHeight }" :class="{ border: topSeparator === 'border', background: topSeparator === 'background' }">
       <slot name="top"></slot>
     </div>
@@ -100,9 +100,6 @@ export default defineComponent({
     },
     currentWidth(): string {
       return this.isExpanded ? this.expandedWidth : "60px";
-    },
-    currentHeight(): string {
-      return (window.innerHeight - parseInt(this.topOffset, 10)) + 'px';
     }
   },
   methods: {
@@ -142,9 +139,6 @@ $expand-anim-speed: 0.2s;
   flex-direction: column;
   justify-content: space-between;
   width: $collapsed-width;
-  min-height: 100vh;
-  height: 100vh;
-  max-height: 100vh;
   overflow: hidden;
   position: fixed;
   z-index: 99;
